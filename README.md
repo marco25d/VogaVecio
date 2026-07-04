@@ -1,16 +1,51 @@
-# React + Vite
+<p align="center">
+  <img src="public/icons/icon-512.png" width="96" alt="VogaVecio logo" />
+</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+<h1 align="center">VogaVecio</h1>
 
-Currently, two official plugins are available:
+<p align="center">
+  A simple app that uses OpenStreetMap to estimate nautical travel times for rowing boats, including kayaks, SUPs, and sandolos.
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+<p align="center">
+  <a href="https://marco25d.github.io/VogaVecio/">🌊 Open the app</a>
+</p>
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## What it does
 
-## Expanding the Oxlint configuration
+Pick two points on the sea, choose your vessel and paddling pace, and VogaVecio gives you a realistic time estimate — adjusted in real time for live wind and wave conditions from the Open-Meteo API.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- **Tap to place** start and end points on the map
+- **Use your GPS position** as the starting point
+- **Choose your vessel** — Kayak, SUP, Sandolo, or Galea veneziana
+- **Set your pace** — Slow, Fast, or a custom speed in km/h
+- **Sea current** — Favorable, None, Against, or a custom percentage
+- **Live weather** — wind speed and wave height fetched automatically, with color-coded severity levels (Very low → Extreme)
+- **Safety warning** — if conditions are High or Extreme, the app discourages the trip (unless you're on a Galea veneziana)
+
+## Works on mobile
+
+VogaVecio is a **Progressive Web App (PWA)**. On Android or iPhone, open the link in your browser and tap *Add to Home Screen* — it installs like a native app, no app store required.
+
+## Tech
+
+- [React](https://react.dev/) + [Vite](https://vite.dev/)
+- [Leaflet](https://leafletjs.com/) / [react-leaflet](https://react-leaflet.js.org/) — OpenStreetMap tiles
+- [Open-Meteo](https://open-meteo.com/) — free weather & marine API, no key required
+- PWA via [vite-plugin-pwa](https://vite-pwa-org.netlify.app/)
+
+## Run locally
+
+```bash
+npm install
+npm run dev
+```
+
+## Deploy
+
+```bash
+npm run deploy   # builds and pushes to GitHub Pages
+```
