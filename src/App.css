@@ -93,6 +93,12 @@ body {
   font-style: italic;
 }
 
+.map-intro-hint {
+  font-size: 0.75rem;
+  color: #7a8a9a;
+  line-height: 1.4;
+}
+
 @media (max-width: 640px) {
   .map-intro {
     bottom: 10px;

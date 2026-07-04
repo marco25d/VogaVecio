@@ -142,6 +142,10 @@ export default function App() {
                 and find out how long the crossing will take — estimated from live <strong>wind</strong> and <strong>wave</strong> conditions,
                 <strong> sea current</strong>, and the settings you choose for your trip.
               </p>
+              <hr className="map-intro-divider" />
+              <p className="map-intro-hint">
+                ⚠️ The route is sampled at fixed intervals. Only water segments are counted toward distance and time. Minor inaccuracies near coastlines are expected due to the resolution of the land detection dataset.
+              </p>
             </div>
           )}
           <Map

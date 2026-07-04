@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Polyline, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { loadLandmask, classifyRoute, isLoaded } from '../utils/landmask';
 
-// Fix Leaflet's default icon path issue with Vite
 import iconUrl from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 L.Icon.Default.mergeOptions({ iconUrl, shadowUrl: iconShadow, iconRetinaUrl: iconUrl });
@@ -13,7 +13,6 @@ const startIcon = new L.Icon({
   shadowUrl: iconShadow,
   iconSize: [25, 41],
   iconAnchor: [12, 41],
-  className: 'marker-start',
 });
 
 const endIcon = new L.Icon({
@@ -43,6 +42,23 @@ function FlyTo({ center }) {
 }
 
 export default function Map({ start, end, onSetStart, onSetEnd, flyTo }) {
+  const [segments, setSegments] = useState([]);
+  const [maskReady, setMaskReady] = useState(isLoaded());
+
+  useEffect(() => {
+    if (!maskReady) {
+      loadLandmask().then(() => setMaskReady(true));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (start && end && maskReady) {
+      setSegments(classifyRoute(start, end));
+    } else {
+      setSegments([]);
+    }
+  }, [start, end, maskReady]);
+
   return (
     <MapContainer
       center={[41.9, 12.5]}
@@ -57,7 +73,17 @@ export default function Map({ start, end, onSetStart, onSetEnd, flyTo }) {
       {flyTo && <FlyTo center={flyTo} />}
       {start && <Marker position={start} icon={startIcon} />}
       {end && <Marker position={end} icon={endIcon} />}
-      {start && end && <Polyline positions={[start, end]} color="#0077cc" weight={3} dashArray="6 4" />}
+
+      {segments.map((seg, i) => (
+        <Polyline
+          key={i}
+          positions={seg.positions}
+          color={seg.isLand ? '#9e9e9e' : '#0077cc'}
+          weight={seg.isLand ? 2 : 3}
+          dashArray={seg.isLand ? '5 6' : undefined}
+          opacity={seg.isLand ? 0.5 : 1}
+        />
+      ))}
     </MapContainer>
   );
 }
