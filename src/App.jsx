@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
+import appLogo from './assets/icon_vogavecio.png';
 import Map from './components/Map';
 import Controls from './components/Controls';
 import Result from './components/Result';
@@ -96,6 +97,7 @@ export default function App() {
   return (
     <div className="app">
       <header className="app-header">
+        <img src={appLogo} alt="VogaVecio" className="app-logo" />
         <h1>VogaVecio</h1>
         <Result result={result} />
         {weatherLoading && <span className="weather-loading">Fetching weather…</span>}
