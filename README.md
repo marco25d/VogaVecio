@@ -30,6 +30,16 @@ Pick two points on the sea, choose your vessel and paddling pace, and VogaVecio 
 
 VogaVecio is a **Progressive Web App (PWA)**. On Android or iPhone, open the link in your browser and tap *Add to Home Screen* — it installs like a native app, no app store required.
 
+## APIs used
+
+| API | What it provides | Why |
+|-----|-----------------|-----|
+| [Open-Meteo Forecast](https://open-meteo.com/) | Wind speed and direction at the route midpoint | Completely free, no API key or registration required, reliable global coverage |
+| [Open-Meteo Marine](https://open-meteo.com/en/docs/marine-weather-api) | Wave height at the route midpoint | Same provider, same conditions — zero setup, returns significant wave height which is enough for a safety estimate |
+| [OpenStreetMap](https://www.openstreetmap.org/) via Leaflet tiles | Map rendering | Free and open, no API key, worldwide coverage, community maintained |
+
+All APIs are **free and keyless** — the app works out of the box with no account or token needed.
+
 ## Tech
 
 - [React](https://react.dev/) + [Vite](https://vite.dev/)
