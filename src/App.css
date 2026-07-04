@@ -41,6 +41,60 @@ body {
 .map-wrap {
   flex: 1;
   min-height: 0;
+  position: relative;
+}
+
+.map-intro {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.93);
+  backdrop-filter: blur(4px);
+  border-radius: 12px;
+  padding: 14px 18px;
+  max-width: 400px;
+  width: calc(100% - 32px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  border-left: 4px solid #0077cc;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #1a2533;
+  pointer-events: none;
+}
+
+.map-intro-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.map-intro-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.map-intro-divider {
+  border: none;
+  border-top: 1px solid #dde3ea;
+  margin: 8px 0;
+}
+
+.map-intro-en {
+  color: #4a5a6a;
+  font-style: italic;
+}
+
+@media (max-width: 640px) {
+  .map-intro {
+    bottom: 10px;
+    padding: 10px 13px;
+    font-size: 0.78rem;
+    line-height: 1.45;
+    width: calc(100% - 20px);
+    border-radius: 10px;
+  }
 }
 
 /* Controls sidebar */
@@ -72,8 +126,15 @@ body {
 
 .activity-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+
+/* Speed above Sea Current on desktop */
+.twin-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .activity-card {
@@ -151,13 +212,6 @@ body {
   border-color: #888;
 }
 
-.speed-btn-full {
-  width: 100%;
-  flex-direction: row;
-  justify-content: center;
-  gap: 6px;
-  padding: 6px 10px;
-}
 
 .speed-btn-name {
   font-size: 0.72rem;
@@ -375,27 +429,130 @@ button:disabled {
 
 /* Mobile layout */
 @media (max-width: 640px) {
+  .app-header {
+    padding: 7px 12px;
+    gap: 10px;
+  }
+
+  .app-header h1 {
+    font-size: 1rem;
+  }
+
+  .result {
+    font-size: 0.82rem;
+    padding: 4px 8px;
+    gap: 5px;
+  }
+
+  /* Weather bar: wrap on small screens */
+  .weather-bar {
+    padding: 5px 10px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .weather-badges {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .weather-badge {
+    font-size: 0.75rem;
+    gap: 3px;
+  }
+
+  .badge-level {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+  }
+
+  /* Warning: compact */
+  .warning {
+    padding: 7px 12px;
+    font-size: 0.78rem;
+  }
+
+  /* Map gets 55% of viewport, controls get the rest */
   .app-body {
     flex-direction: column;
   }
+
+  .map-wrap {
+    flex: 0 0 55dvh;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  /* Controls: compact horizontal scrollable panel */
   .controls {
+    flex: 1 1 0;
     width: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 10px 12px;
+    overflow-y: auto;
     border-left: none;
     border-top: 1px solid #dde3ea;
+    padding: 10px 12px;
+    gap: 10px;
   }
-  .control-group {
-    flex: 1 1 120px;
+
+  /* Activity: 4 columns on mobile */
+  .activity-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
   }
-  .control-actions {
-    flex: 1 1 120px;
-    align-items: flex-end;
+
+  .activity-card {
+    padding: 5px 2px 4px;
+    gap: 3px;
+    border-radius: 8px;
   }
+
+  .activity-icon {
+    width: 30px;
+    height: 20px;
+  }
+
+  .activity-label {
+    font-size: 0.58rem;
+  }
+
+  /* Speed + current side by side on mobile */
+  .twin-groups {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .twin-groups .control-group {
+    flex: 1;
+  }
+
+  .speed-btn {
+    padding: 5px 2px 4px;
+    gap: 1px;
+  }
+
+  .speed-btn-name {
+    font-size: 0.65rem;
+  }
+
+  .speed-btn-val {
+    font-size: 0.6rem;
+  }
+
+  .control-group label {
+    font-size: 0.68rem;
+  }
+
   .hint {
-    width: 100%;
-    flex-basis: 100%;
+    font-size: 0.72rem;
+  }
+
+  .control-actions {
+    gap: 6px;
+  }
+
+  button {
+    font-size: 0.75rem;
+    padding: 7px 4px;
   }
 }

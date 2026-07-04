@@ -119,6 +119,29 @@ export default function App() {
 
       <div className="app-body">
         <div className="map-wrap">
+          {!start && (
+            <div className="map-intro">
+              <div className="map-intro-header">
+                <svg className="map-intro-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="10" stroke="#0077cc" strokeWidth="2"/>
+                  <line x1="12" y1="11" x2="12" y2="17" stroke="#0077cc" strokeWidth="2" strokeLinecap="round"/>
+                  <circle cx="12" cy="7.5" r="1.2" fill="#0077cc"/>
+                </svg>
+              </div>
+              <p className="map-intro-it">
+                Imposta un punto di <strong>partenza</strong> e di <strong>arrivo</strong> tra due coste
+                e scopri quanto tempo ci vuole per effettuare la traversata — calcolato in base
+                alle condizioni meteo di <strong>vento</strong> e <strong>moto ondoso</strong>,
+                alle <strong>correnti</strong> e alle configurazioni che imposti per il viaggio.
+              </p>
+              <hr className="map-intro-divider" />
+              <p className="map-intro-en">
+                Set a <strong>start</strong> and <strong>end</strong> point between two coastlines
+                and find out how long the crossing will take — estimated from live <strong>wind</strong> and <strong>wave</strong> conditions,
+                <strong> sea current</strong>, and the settings you choose for your trip.
+              </p>
+            </div>
+          )}
           <Map
             start={start}
             end={end}

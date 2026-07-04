@@ -50,7 +50,7 @@ const LABELS = {
   kayak: 'Kayak',
   sup: 'SUP',
   sandolo: 'Sandolo',
-  galea: 'Galea veneziana',
+  galea: 'Galea',
 };
 
 export default function Controls({ activity, speedMode, customSpeed, currentMode, customCurrentPct, onChange, onGeolocate, onReset, hasStart, hasEnd }) {
@@ -58,6 +58,8 @@ export default function Controls({ activity, speedMode, customSpeed, currentMode
 
   return (
     <div className="controls">
+
+      {/* Activity — always 4 columns */}
       <div className="control-group">
         <label>Activity</label>
         <div className="activity-grid">
@@ -76,111 +78,106 @@ export default function Controls({ activity, speedMode, customSpeed, currentMode
         </div>
       </div>
 
-      <div className="control-group">
-        <label>Speed</label>
-        <div className="speed-row">
-          <button
-            type="button"
-            className={`speed-btn speed-slow ${speedMode === 'slow' ? 'active' : ''}`}
-            onClick={() => onChange('speedMode', 'slow')}
-          >
-            <span className="speed-btn-name">Slow</span>
-            <span className="speed-btn-val">{speeds.slow} km/h</span>
-          </button>
-          <button
-            type="button"
-            className={`speed-btn speed-fast ${speedMode === 'fast' ? 'active' : ''}`}
-            onClick={() => onChange('speedMode', 'fast')}
-          >
-            <span className="speed-btn-name">Fast</span>
-            <span className="speed-btn-val">{speeds.fast} km/h</span>
-          </button>
-        </div>
-        <button
-          type="button"
-          className={`speed-btn speed-custom speed-btn-full ${speedMode === 'custom' ? 'active' : ''}`}
-          onClick={() => onChange('speedMode', 'custom')}
-        >
-          <span className="speed-btn-name">Custom km/h</span>
-          <span className="speed-btn-val">✎</span>
-        </button>
-        {speedMode === 'custom' && (
-          <div className="custom-speed-wrap">
-            <input
-              type="number"
-              min="1"
-              max="50"
-              step="0.5"
-              value={customSpeed}
-              onChange={(e) => onChange('customSpeed', e.target.value)}
-              className="custom-speed-input"
-              placeholder="km/h"
-            />
-            <span className="custom-speed-unit">km/h</span>
+      {/* Speed + Sea Current side by side */}
+      <div className="twin-groups">
+        <div className="control-group">
+          <label>Speed</label>
+          <div className="speed-row">
+            <button
+              type="button"
+              className={`speed-btn speed-slow ${speedMode === 'slow' ? 'active' : ''}`}
+              onClick={() => onChange('speedMode', 'slow')}
+            >
+              <span className="speed-btn-name">Slow</span>
+              <span className="speed-btn-val">{speeds.slow}</span>
+            </button>
+            <button
+              type="button"
+              className={`speed-btn speed-fast ${speedMode === 'fast' ? 'active' : ''}`}
+              onClick={() => onChange('speedMode', 'fast')}
+            >
+              <span className="speed-btn-name">Fast</span>
+              <span className="speed-btn-val">{speeds.fast}</span>
+            </button>
+            <button
+              type="button"
+              className={`speed-btn speed-custom ${speedMode === 'custom' ? 'active' : ''}`}
+              onClick={() => onChange('speedMode', 'custom')}
+              title="Custom speed"
+            >
+              <span className="speed-btn-name">✎</span>
+            </button>
           </div>
-        )}
-      </div>
+          {speedMode === 'custom' && (
+            <div className="custom-speed-wrap">
+              <input
+                type="number"
+                min="1" max="50" step="0.5"
+                value={customSpeed}
+                onChange={(e) => onChange('customSpeed', e.target.value)}
+                className="custom-speed-input"
+                placeholder="km/h"
+              />
+              <span className="custom-speed-unit">km/h</span>
+            </div>
+          )}
+        </div>
 
-      <div className="control-group">
-        <label>Sea Current</label>
-        <div className="speed-row">
-          <button
-            type="button"
-            className={`speed-btn current-favorable ${currentMode === 'favorable' ? 'active' : ''}`}
-            onClick={() => onChange('currentMode', 'favorable')}
-          >
-            <span className="speed-btn-name">Favor</span>
-            <span className="speed-btn-val">+15%</span>
-          </button>
-          <button
-            type="button"
-            className={`speed-btn current-none ${currentMode === 'none' ? 'active' : ''}`}
-            onClick={() => onChange('currentMode', 'none')}
-          >
-            <span className="speed-btn-name">None</span>
-            <span className="speed-btn-val">0%</span>
-          </button>
-          <button
-            type="button"
-            className={`speed-btn current-against ${currentMode === 'against' ? 'active' : ''}`}
-            onClick={() => onChange('currentMode', 'against')}
-          >
-            <span className="speed-btn-name">Against</span>
-            <span className="speed-btn-val">−15%</span>
-          </button>
-        </div>
-        <button
-          type="button"
-          className={`speed-btn speed-custom speed-btn-full ${currentMode === 'custom' ? 'active' : ''}`}
-          onClick={() => onChange('currentMode', 'custom')}
-        >
-          <span className="speed-btn-name">Custom %</span>
-          <span className="speed-btn-val">✎</span>
-        </button>
-        {currentMode === 'custom' && (
-          <div className="custom-speed-wrap">
-            <input
-              type="number"
-              min="-50"
-              max="50"
-              step="1"
-              value={customCurrentPct}
-              onChange={(e) => onChange('customCurrentPct', e.target.value)}
-              className="custom-speed-input"
-              placeholder="%"
-            />
-            <span className="custom-speed-unit">% (− slow, + fast)</span>
+        <div className="control-group">
+          <label>Sea Current</label>
+          <div className="speed-row">
+            <button
+              type="button"
+              className={`speed-btn current-favorable ${currentMode === 'favorable' ? 'active' : ''}`}
+              onClick={() => onChange('currentMode', 'favorable')}
+            >
+              <span className="speed-btn-name">▲</span>
+              <span className="speed-btn-val">+15%</span>
+            </button>
+            <button
+              type="button"
+              className={`speed-btn current-none ${currentMode === 'none' ? 'active' : ''}`}
+              onClick={() => onChange('currentMode', 'none')}
+            >
+              <span className="speed-btn-name">–</span>
+              <span className="speed-btn-val">none</span>
+            </button>
+            <button
+              type="button"
+              className={`speed-btn current-against ${currentMode === 'against' ? 'active' : ''}`}
+              onClick={() => onChange('currentMode', 'against')}
+            >
+              <span className="speed-btn-name">▼</span>
+              <span className="speed-btn-val">−15%</span>
+            </button>
+            <button
+              type="button"
+              className={`speed-btn speed-custom ${currentMode === 'custom' ? 'active' : ''}`}
+              onClick={() => onChange('currentMode', 'custom')}
+              title="Custom current"
+            >
+              <span className="speed-btn-name">✎</span>
+            </button>
           </div>
-        )}
+          {currentMode === 'custom' && (
+            <div className="custom-speed-wrap">
+              <input
+                type="number"
+                min="-50" max="50" step="1"
+                value={customCurrentPct}
+                onChange={(e) => onChange('customCurrentPct', e.target.value)}
+                className="custom-speed-input"
+                placeholder="%"
+              />
+              <span className="custom-speed-unit">%</span>
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="control-actions">
-        <button onClick={onGeolocate} title="Use my GPS position as start">
-          My location
-        </button>
-        <button onClick={onReset} disabled={!hasStart && !hasEnd} className="btn-reset">
-          New trip
-        </button>
+        <button onClick={onGeolocate}>My location</button>
+        <button onClick={onReset} disabled={!hasStart && !hasEnd} className="btn-reset">New trip</button>
       </div>
 
       <p className="hint">
