@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="VogaVecio.png" width="96" alt="VogaVecio logo" />
+  <img src="VogaVecio.png" width="300" alt="VogaVecio logo" />
 </p>
 
 <h1 align="center">VogaVecio</h1>
